@@ -34,7 +34,7 @@ body {
   margin-bottom: 30px;
 }
 
-#display {
+#display-box {
  min-height: 100px;
   display: flex;
   flex-wrap: wrap;
@@ -45,6 +45,29 @@ body {
   background-color: #171717;
   border: 2px solid #9dffad;
   border-radius: 15px;
+}
+@keyframes blink {
+    0%{
+        opacity:1;
+    }
+    50%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+    
+}
+#display{
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 32px;
+}
+#display::after{
+    content: '|';
+    color: #9dffad;
+    animation: blink 1s infinite;
+
 }
 
 #countdown {
@@ -79,6 +102,12 @@ body {
   text-align: center;
   color: white;
   margin: 10px 0;
+}
+.d-none{
+    display:none;
+}
+.d-flex{
+    display: flex;
 }
 
 .green {

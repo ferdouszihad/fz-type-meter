@@ -1,4 +1,5 @@
 const display = document.getElementById("display");
+const displayBox = document.getElementById("display-box");
 const question = document.getElementById("question");
 const startBtn = document.getElementById("start");
 const countdownOverlay = document.getElementById("countdown");
@@ -10,6 +11,7 @@ let userText = "";
 let errorCount = 0;
 let startTime;
 let questionText = "";
+let typeSpeed = 0;
 
 // Load and display question
 fetch("./texts.json")
@@ -80,25 +82,30 @@ const gameOver = () => {
   modalBackground.classList.toggle("hidden");
   // clear user text
   display.innerHTML = "";
+  display.classList.add("d-none");
+  display.classList.remove("d-flex");
   // make it inactive
-  display.classList.add("inactive");
+  displayBox.classList.add("inactive");
   // show result
+  typeSpeed = checkSpeed(questionText, timeTaken);
+
   resultModal.innerHTML += `
     <h1>Finished!</h1>
     <p class="gap-down-10">You took: 
     <span class="bold">${timeTaken.toFixed(2)}</span> seconds</p>
     <p class="gap-down-10">You made <span class="bold red">${errorCount}</span> mistakes</p>
+
+    <p class="gap-down-10">Your Typing Speed = <span class="bold red">${typeSpeed}</span> WPM</p>
     <button onclick="closeModal()">Close</button>
   `;
   startBtn.innerText = "Try again";
 
-  addHistory(questionText, timeTaken, errorCount);
-
+  addHistory(questionText, timeTaken, errorCount, typeSpeed);
   // restart everything
   startTime = null;
   errorCount = 0;
   userText = "";
-  display.classList.add("inactive");
+  displayBox.classList.add("inactive");
 };
 
 const closeModal = () => {
@@ -120,9 +127,11 @@ const start = () => {
     if (count === 0) {
       // -------------- START TYPING -----------------
       startBtn.innerText = "Started";
+      display.classList.remove("d-none");
+      display.classList.add("d-flex");
       document.addEventListener("keydown", typeController);
       countdownOverlay.style.display = "none";
-      display.classList.remove("inactive");
+      displayBox.classList.remove("inactive");
       clearInterval(startCountdown);
       startTime = new Date().getTime();
     }
@@ -145,3 +154,8 @@ setInterval(() => {
     startTime ? timeSpent.toFixed(0) : 0
   } seconds`;
 }, 1000);
+
+const checkSpeed = (str, time) => {
+  let a = str.split(" ");
+  return ((a.length / time) * 60).toFixed(2);
+};

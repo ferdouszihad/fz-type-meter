@@ -103,6 +103,9 @@ body {
   color: white;
   margin: 10px 0;
 }
+.text-center{
+    text-align: center;
+}
 .d-none{
     display:none;
 }

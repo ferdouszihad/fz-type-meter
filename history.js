@@ -1,6 +1,12 @@
 const histories = document.getElementById("histories");
 
-function addHistory(questionText, timeTaken, errorCount, typeSpeed) {
+function addHistory(
+  questionText,
+  timeTaken,
+  errorCount,
+  typeSpeed,
+  currentTime
+) {
   const newRow = document.createElement("div");
   newRow.classList.add("card");
 
@@ -16,7 +22,13 @@ function addHistory(questionText, timeTaken, errorCount, typeSpeed) {
   histories.appendChild(newRow);
 
   let previousTests = JSON.parse(localStorage.getItem("testHistory")) || [];
-  previousTests.push({ questionText, timeTaken, errorCount, typeSpeed });
+  previousTests.push({
+    questionText,
+    timeTaken,
+    errorCount,
+    typeSpeed,
+    currentTime,
+  });
   localStorage.setItem("testHistory", JSON.stringify(previousTests));
 
   displayHistory();
@@ -31,10 +43,12 @@ function displayHistory() {
     newRow.classList.add("card");
 
     newRow.innerHTML = `
-  <h3>${test.questionText}</h3>
-  <p>You took: <span class="bold">${test.timeTaken}</span> seconds</p>
+    <h3 style='font-weight:500;'>${test.questionText}</h3>
+    <p>You took: <span class="bold">${test.timeTaken}</span> seconds</p>
     <p>You made <span class="bold red">${test.errorCount}</span> mistakes</p>
-    <p>Typing Speed =  <span class="bold red">${test.typeSpeed}</span> WPM</p>
+    <p>Typing Speed =  <span class="bold green">${test.typeSpeed}</span> WPM</p> 
+    <p style="border-top:1px solid #ddd ; margin-top:8px">Practice Time <br> <span class="green">${test.currentTime}</span></p>
+    
   `;
 
     histories.appendChild(newRow);

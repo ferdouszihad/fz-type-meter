@@ -12,6 +12,7 @@ let errorCount = 0;
 let startTime;
 let questionText = "";
 let typeSpeed = 0;
+let currentTime = 0;
 
 // Load and display question
 const load = () => {
@@ -98,12 +99,14 @@ const gameOver = () => {
     <span class="bold">${timeTaken.toFixed(2)}</span> seconds</p>
     <p class="gap-down-10">You made <span class="bold red">${errorCount}</span> mistakes</p>
 
-    <p class="gap-down-10">Your Typing Speed = <span class="bold red">${typeSpeed}</span> WPM</p>
+    <p class="gap-down-10">Your Typing Speed = <span class="bold green">${typeSpeed}</span> WPM</p>
     <button onclick="closeModal()">Close</button>
   `;
   startBtn.innerText = "Start again";
 
-  addHistory(questionText, timeTaken, errorCount, typeSpeed);
+  currentTime = new Date().toUTCString();
+
+  addHistory(questionText, timeTaken, errorCount, typeSpeed, currentTime);
   // restart everything
   startTime = null;
   errorCount = 0;

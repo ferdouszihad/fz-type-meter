@@ -90,6 +90,7 @@ const gameOver = () => {
     <p class="gap-down-10">You made <span class="bold red">${errorCount}</span> mistakes</p>
     <button onclick="closeModal()">Close</button>
   `;
+  startBtn.innerText = "Try again";
 
   addHistory(questionText, timeTaken, errorCount);
 
@@ -118,10 +119,10 @@ const start = () => {
     // finished timer
     if (count === 0) {
       // -------------- START TYPING -----------------
+      startBtn.innerText = "Started";
       document.addEventListener("keydown", typeController);
       countdownOverlay.style.display = "none";
       display.classList.remove("inactive");
-
       clearInterval(startCountdown);
       startTime = new Date().getTime();
     }

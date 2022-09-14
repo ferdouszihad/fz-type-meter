@@ -14,12 +14,15 @@ let questionText = "";
 let typeSpeed = 0;
 
 // Load and display question
-fetch("./texts.json")
-  .then((res) => res.json())
-  .then((data) => {
-    questionText = data[Math.floor(Math.random() * data.length)];
-    question.innerHTML = questionText;
-  });
+const load = () => {
+  fetch("./texts.json")
+    .then((res) => res.json())
+    .then((data) => {
+      questionText = data[Math.floor(Math.random() * data.length)];
+      question.innerHTML = questionText;
+    });
+};
+load();
 
 // checks the user typed character and displays accordingly
 const typeController = (e) => {
@@ -98,7 +101,7 @@ const gameOver = () => {
     <p class="gap-down-10">Your Typing Speed = <span class="bold red">${typeSpeed}</span> WPM</p>
     <button onclick="closeModal()">Close</button>
   `;
-  startBtn.innerText = "Try again";
+  startBtn.innerText = "Start again";
 
   addHistory(questionText, timeTaken, errorCount, typeSpeed);
   // restart everything
@@ -106,6 +109,7 @@ const gameOver = () => {
   errorCount = 0;
   userText = "";
   displayBox.classList.add("inactive");
+  load();
 };
 
 const closeModal = () => {

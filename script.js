@@ -96,7 +96,7 @@ const gameOver = () => {
   resultModal.innerHTML += `
     <h1>Finished!</h1>
     <p class="gap-down-10">You took: 
-    <span class="bold">${timeTaken.toFixed(2)}</span> seconds</p>
+    <span class="bold">${timeTaken.toFixed(0)}</span> seconds</p>
     <p class="gap-down-10">You made <span class="bold red">${errorCount}</span> mistakes</p>
 
     <p class="gap-down-10">Your Typing Speed = <span class="bold green">${typeSpeed}</span> WPM</p>
@@ -164,5 +164,5 @@ setInterval(() => {
 
 const checkSpeed = (str, time) => {
   let a = str.split(" ");
-  return ((a.length / time) * 60).toFixed(2);
+  return ((a.length / time) * 60).toFixed(0);
 };

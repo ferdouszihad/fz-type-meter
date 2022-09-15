@@ -44,7 +44,9 @@ function displayHistory() {
 
     newRow.innerHTML = `
     <h3 style='font-weight:500;'>${test.questionText}</h3>
-    <p>You took: <span class="bold">${test.timeTaken}</span> seconds</p>
+    <p>You took: <span class="bold">${test.timeTaken.toFixed(
+      0
+    )} </span> seconds</p>
     <p>You made <span class="bold red">${test.errorCount}</span> mistakes</p>
     <p>Typing Speed =  <span class="bold green">${
       test.typeSpeed ? test.typeSpeed : "Not available"

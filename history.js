@@ -46,8 +46,12 @@ function displayHistory() {
     <h3 style='font-weight:500;'>${test.questionText}</h3>
     <p>You took: <span class="bold">${test.timeTaken}</span> seconds</p>
     <p>You made <span class="bold red">${test.errorCount}</span> mistakes</p>
-    <p>Typing Speed =  <span class="bold green">${test.typeSpeed}</span> WPM</p> 
-    <p style="border-top:1px solid #ddd ; margin-top:8px">Practice Time <br> <span class="green">${test.currentTime}</span></p>
+    <p>Typing Speed =  <span class="bold green">${
+      test.typeSpeed ? test.typeSpeed : "Not available"
+    }</span> WPM</p> 
+    <p style="border-top:1px solid #ddd ; margin-top:8px">Practice Time <br> <span class="green">${
+      test.currentTime ? test.currentTime : "No Data available"
+    }</span></p>
     
   `;
 
